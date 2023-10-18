@@ -1,45 +1,46 @@
-// Interface creation
 interface Student {
-    firstName: string;
-    lastName: string;
-    age: number;
-    location: string;
+  firstName: string,
+  lastName: string,
+  age: Number,
+  location: string
 }
 
-// 
-const std1:Student = {
-    firstName: "Pita",
-    lastName: "Zee",
-    age:25,
-    location: "Kitwe",
+const student1: Student = {
+  firstName: "Kalkidan",
+  lastName: "Demes",
+  age: 25,
+  location: "Ethiopia"
 }
 
-const std2:Student = {
-    firstName: "Sepi",
-    lastName: "Muke",
-    age: 24,
-    location: "Lusaka"
+const student2: Student = {
+  firstName: "Tester",
+  lastName: "unknown",
+  age: 30,
+  location: "Kenya"
 }
 
-// Create Array with 2 student variables
-const studentsList: Student[] = [std1, std2]
+const studentsList: Array<Student> = [ student1, student2 ];
 
-// Create vanilla js table 
-const table: HTMLTableElement = document.createElement('table');
+const body: HTMLBodyElement = document.getElementsByTagName("body")[0];
+const table: HTMLTableElement = document.createElement("table");
+const thead: HTMLTableSectionElement = document.createElement("thead");
+const tbody: HTMLTableSectionElement = document.createElement("tbody");
+const rowHead: HTMLTableRowElement = thead.insertRow(0);
+const cell1Head: HTMLTableCellElement = rowHead.insertCell(0);
+const cell2Head: HTMLTableCellElement = rowHead.insertCell(1);
 
-document.body.appendChild(table);
-const thead: HTMLTableSectionElement = table.createTHead();
-const row: HTMLTableRowElement = thead.insertRow();
-const th1: HTMLTableCellElement = row.insertCell(0);
-const th2: HTMLTableCellElement = row.insertCell(1);
-th1.innerHTML = ("<b>First Name</b>");
-th2.innerHTML = ("<b>Location</b>");
-const body: HTMLTableSectionElement = table.createTBody();
-// Iterate the array to get student name and location
-studentsList.map((student) => {
-	const newRow: HTMLTableRowElement = body.insertRow();
-	const firstNameRow: HTMLTableCellElement = newRow.insertCell();
-	const locationRow: HTMLTableCellElement= newRow.insertCell();
-	firstNameRow.innerHTML = student.firstName;
-	locationRow.innerHTML = student.location;
-})
+cell1Head.innerHTML = "firstName";
+cell2Head.innerHTML = "location";
+table.append(thead);
+
+studentsList.forEach((student) => {
+  const row: HTMLTableRowElement = tbody.insertRow(0);
+  const cell1: HTMLTableCellElement = row.insertCell(0);
+  const cell2: HTMLTableCellElement = row.insertCell(1);
+
+  cell1.innerHTML = student.firstName;
+  cell2.innerHTML = student.location;
+});
+
+table.append(tbody);
+body.append(table);

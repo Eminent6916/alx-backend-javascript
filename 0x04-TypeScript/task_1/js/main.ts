@@ -1,49 +1,46 @@
-// create interface
 interface Teacher {
-    firstName: string;
-    lastName: string;
-    fullTimeEmployee: boolean;
-    yearsOfExperience?: number;
-    location: string;
-    [others: string]: any;
-}
+  readonly firstName: string,
+  readonly lastName: string,
+  fullTimeEmployee: boolean,
+  yearsOfExperience?: Number,
+  location: string,
+  [propName: string]: any,
+  }
 
 interface Directors extends Teacher {
-    numberOfReports: number;
+  numberOfReports: Number,
 }
 
 interface printTeacherFunction {
-    printTeacher(firstName: string, lastName: string): string;
+  (firstName: string, lastName: string): string;  
 }
 
-function printTeacher(firstName: string, lastName: string) {
-    return (firstName[0] + ". " + lastName);
+const printTeacher: printTeacherFunction = (firstName: string, lastName: string): string => `${firstName.charAt(0)}.${lastName}`;
+interface classInterface {
+  workOnHomework(): string;
+  displayName(): string;
 }
 
+class StudentClass implements classInterface{
+  firstName: string;
+  lastName: string;
 
-interface StudentInterface {
-    firstName: string;
-    lastName: string;
+  constructor(firstName: string, lastName: string) {
+    this.firstName;
+    this.lastName;
+  }
+
+  workOnHomework():string{
+    return "Currently working";
+  }
+  displayName():string{
+    return this.firstName;
+  }
 }
-
 interface StudentConstructor {
-    new(f: string, l: string): {firstName: string, lastName: string};
+  (firstName: string, lastName: string): classInterface;
 }
 
-class StudentClass implements StudentInterface {
-    firstName: string;
-    lastName: string;
-
-    constructor(fname: string, lname: string) {
-        this.firstName = fname;
-        this.lastName = lname;
-    }
-
-    workOnHomework(): string {
-        return "Currently working";
-    }
-
-    displayName(): string {
-        return (this.firstName);
-    }
-}
+const student = new StudentClass("Djo", "djo");
+console.log(student.displayName())
+console.log(student.workOnHomework())
